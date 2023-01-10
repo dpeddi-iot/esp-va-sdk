@@ -82,6 +82,7 @@ int va_board_init()
     ret = i2s_zero_dma_buffer(I2S_PORT_NUM);
 
     static media_hal_config_t media_hal_cfg = MEDIA_HAL_DEFAULT();
+    media_hal_cfg.adc_input = MEDIA_HAL_ADC_INPUT_LINE2;
     static media_hal_playback_cfg_t media_hal_playback_cfg = DEFAULT_MEDIA_HAL_PLAYBACK_CONFIG();
     media_hal_init(&media_hal_cfg, &media_hal_playback_cfg);
 
