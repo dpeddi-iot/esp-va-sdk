@@ -49,6 +49,7 @@ static esp_err_t button_driver_gpio_init()
             gpio_cfg.pin_bit_mask = ((int64_t)1) << (ffsll(button_config.button_val[event]) - 1);
             gpio_cfg.mode = GPIO_MODE_INPUT;
             gpio_cfg.pull_up_en = 1;
+            gpio_cfg.pull_down_en = 0;
 
             gpio_config(&gpio_cfg);
             gpio_isr_handler_add(ffsll(button_config.button_val[event]) - 1, button_driver_gpio_isr_handler, (void *)(ffsll(button_config.button_val[event]) - 1));

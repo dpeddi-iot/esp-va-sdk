@@ -348,10 +348,12 @@ esp_err_t es8388_control_volume(uint8_t volume)
     reg = reg & 0xFB;
     res |= es8388_write_reg(ES8388_ADDR, ES8388_DACCONTROL3, reg | (ES8388_DISABLE_MUTE << 2));
     volume /= 3;
-    res  = es8388_write_reg(ES8388_ADDR, ES8388_DACCONTROL24, volume);
-    res |= es8388_write_reg(ES8388_ADDR, ES8388_DACCONTROL25, volume);
-    res |= es8388_write_reg(ES8388_ADDR, ES8388_DACCONTROL26, 0);
-    res |= es8388_write_reg(ES8388_ADDR, ES8388_DACCONTROL27, 0);
+    res  = es8388_write_reg(ES8388_ADDR, ES8388_DACCONTROL24, volume); // LOUT1 volume 0..33 dB
+    res |= es8388_write_reg(ES8388_ADDR, ES8388_DACCONTROL25, volume); // ROUT1 volume 0..33 dB
+    //res |= es8388_write_reg(ES8388_ADDR, ES8388_DACCONTROL26, 0);
+    //res |= es8388_write_reg(ES8388_ADDR, ES8388_DACCONTROL27, 0);
+    res |= es8388_write_reg(ES8388_ADDR, ES8388_DACCONTROL26, volume); // LOUT2 volume 0..33 dB (headphone volume on ai thinker audio kit)
+    res |= es8388_write_reg(ES8388_ADDR, ES8388_DACCONTROL27, volume); // ROUT2 volume 0..33 dB (headphone volume on ai thinker audio kit)
     return res;
 }
 
